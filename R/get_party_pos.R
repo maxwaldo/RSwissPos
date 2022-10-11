@@ -5,7 +5,7 @@ get_party_pos <- function(party=NA, year=NA) {
   
   if(!is.na(year) & class(year)!="numeric") stop("year argument needs to be numeric.")
   
-  if(!is.na(year) & (any(year>2022)|any(year<1970))) stop("year needs to be between 1970 and 2020")
+  if(!is.na(year) & (any(year>2022)|any(year<1965))) stop("year needs to be between 1965 and 2022")
   
   data(dataParty)
   
