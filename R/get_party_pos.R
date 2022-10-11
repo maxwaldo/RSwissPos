@@ -31,3 +31,4 @@ get_party_pos <- function(party=NA, year=NA) {
     data_party <- data_party[data_party$party %in% party & data_party$year %in% year,]
     
   }
+}
