@@ -17,19 +17,22 @@ get_party_pos <- function(party=NA, year=NA) {
   
   if(!is.na(year) & is.na(party)) {
     
-    dataParty <- dataParty[dataParty$year %in% year,]
+    dataParty <- dataParty[dataParty$Year %in% year,]
+    return(dataParty)
     
   }
   
   if(is.na(year) & !is.na(party)) {
     
-    dataParty <- dataParty[dataParty$party %in% party,]
+    dataParty <- dataParty[dataParty$Party %in% party,]
+    return(dataParty)
     
   }
   
   if(!is.na(year) & !is.na(party)) {
     
-    dataParty <- dataParty[dataParty$party %in% party & dataParty$year %in% year,]
+    dataParty <- dataParty[dataParty$Party %in% party & dataParty$Year %in% year,]
+    return(dataParty)
     
   }
   
