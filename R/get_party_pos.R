@@ -7,7 +7,7 @@ get_party_pos <- function(party=NA, year=NA) {
   
   if(!is.na(year) & (year>2020|year<1970)) stop("year needs to be between 1970 and 2020")
   
-  load("./data/Parties' position over time.Rda")
+  data(dataParty)
   
   if (is.na(year) & is.na(party)) {
     
