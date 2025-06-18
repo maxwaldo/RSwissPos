@@ -1,5 +1,5 @@
 Package: RSwissPos
-Title: Easy access to data on Swiss Direct Democracy and methods to measure parties' and the public's ideological positions.
+Title: Access data on Swiss Direct Democracy.
 Version: 0.0.1
 Authors@R: 
     person("Maxime", "Walder", , "maxime.walder", role = c("aut", "cre"),
