@@ -3,7 +3,7 @@ Title: Collect data on Swiss direct democracy
 Version: 0.0.0.9000
 Authors@R: 
     person("Maxime", "Walder", , "maxime.walder@unige.ch", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-4753-2090"))
-Description: Gives easy access to latest versio of data sets on Swiss direct democracy to measure Swiss parties and population ideological positions based on a peer-reviewed article published in the Swiss Political Science Review.
+Description: Gives easy access to latest version of data sets on Swiss direct democracy to measure Swiss parties and population ideological positions based on a peer-reviewed article published in the Swiss Political Science Review.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
