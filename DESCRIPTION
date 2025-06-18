@@ -4,7 +4,9 @@ Version: 0.0.1
 Authors@R: 
     person("Maxime", "Walder", , "maxime.walder", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Enables users to get easy access to data on Swiss direct democracy. In addition, it provides posterior estimates of ballot discrimination that allow researchers to compute the position of political parties and municipalities similarly as Walder (2025). 
+Description: Enables users to get easy access to data on Swiss direct democracy. 
+In addition, it provides posterior estimates of ballot discrimination that allow researchers to 
+compute the position of political parties and municipalities similarly as Walder (2025). 
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
