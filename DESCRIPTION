@@ -1,5 +1,5 @@
 Package: RSwissPos
-Title: What the Package Does (One Line, Title Case)
+Title: Collect data on Swiss direct democracy
 Version: 0.0.0.9000
 Authors@R: 
     person("Maxime", "Walder", , "maxime.walder@unige.ch", role = c("aut", "cre"))
