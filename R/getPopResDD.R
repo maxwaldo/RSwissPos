@@ -59,7 +59,7 @@ getPopResDD <- function(PlaceType = "All") {
 
   data_json <- suppressWarnings(rjson::fromJSON(paste(readLines("https://www.pxweb.bfs.admin.ch/api/v1/fr/px-x-1703030000_101/px-x-1703030000_101.px"), collapse="")))
   muni_id <- as.data.frame(list(NumberMun = data_json[["variables"]][[1]][["values"]],
-                                Place = levels(data_muni$Place)))
+                                Place = data_json[["variables"]][[1]][["valueTexts"]]))
 
   valid_items <- which(as.Date(substr(data_json[["variables"]][[2]][["valueTexts"]], 1, 10)) %in% as.Date(substr(levels(data_muni$DateName), 1, 10)))
   project_id <- as.data.frame(list(anr = data_json[["variables"]][[2]][["values"]][valid_items],
@@ -77,13 +77,13 @@ getPopResDD <- function(PlaceType = "All") {
     data_muni <- data_muni[data_muni$PlaceType=="Country",]
   }
   if (PlaceType=="Canton") {
-    return(data_muni[data_muni$PlaceType=="Canton",])
+    data_muni <- data_muni[data_muni$PlaceType=="Canton",]
   }
   if (PlaceType=="District") {
-    return(data_muni[data_muni$PlaceType=="Canton",])
+    data_muni <- data_muni[data_muni$PlaceType=="Disctrict",]
   }
-  if (PlaceType=="Country") {
-    return(data_muni[data_muni$PlaceType=="Country",])
+  if (PlaceType=="Municipality") {
+    data_muni <- data_muni[data_muni$PlaceType=="Municipality",]
   }
 
   data_muni <- merge(data_muni, muni_id, by = "Place")
