@@ -6,21 +6,21 @@
 \format{
 A data.frame object with 15 variables:
 \describe{
-\item{DateName}{Date and title of the ballot.}
-\item{Place}{Geographical unit's name.}
-\item{YesPercent}{Percentage of Yes vote for the ballot in the geographical unit.}
-\item{YesVote}{Number of Yes vote for the ballot in the geographical unit.}
-\item{NoVote}{Number of No vote for the ballot and the geographical unit.}
-\item{Voters}{Number of registered voters in the geographical unit at the time of the ballot}
-\item{ReceivedBallots}{Number of ballot received for the ballot in the geographical unit}
-\item{Participation}{Participation in percent for the ballot in the geographical unit}
-\item{ValidBallotsh}{Number of Valid ballots for the ballot in the geographical unit}
-\item{PlaceType}{Geographical level of the geographical unit. Take values "Country", "Canton", "District", or "Municipality"}
-\item{NumberMun}{Geographical unit's unique identifier.}
-\item{anr}{Ballot's unique identifier.}
-\item{Date}{Date of the Ballot.}
-\item{Year}{Year of the Ballot.}
-\item{anr.Swissvotes}{Ballot's unique identifier for the Swissvotes dataset.}
+  \item{DateName}{Date and title of the ballot.}
+  \item{Place}{Geographical unit's name.}
+  \item{YesPercent}{Percentage of Yes vote for the ballot in the geographical unit.}
+  \item{YesVote}{Number of Yes vote for the ballot in the geographical unit.}
+  \item{NoVote}{Number of No vote for the ballot and the geographical unit.}
+  \item{Voters}{Number of registered voters in the geographical unit at the time of the ballot}
+  \item{ReceivedBallots}{Number of ballot received for the ballot in the geographical unit}
+  \item{Participation}{Participation in percent for the ballot in the geographical unit}
+  \item{ValidBallotsh}{Number of Valid ballots for the ballot in the geographical unit}
+  \item{PlaceType}{Geographical level of the geographical unit. Take values "Country", "Canton", "District", or "Municipality"}
+  \item{NumberMun}{Geographical unit's unique identifier.}
+  \item{anr}{Ballot's unique identifier.}
+  \item{Date}{Date of the Ballot.}
+  \item{Year}{Year of the Ballot.}
+  \item{anr.Swissvotes}{Ballot's unique identifier for the Swissvotes dataset.}
 }
 }
 \usage{
