@@ -7,12 +7,13 @@
 \format{
 A data frame with 453 rows and 6 variables:
 \describe{
-\item{anr}{identification number of the ballot}
-\item{Discrimination.2.5}{2.5th percentile of the discrimination parameter posterior estimate}
-\item{Discrimination.25}{25th percentile of the discrimination parameter posterior estimate}
-\item{Discrimination.50}{50th percentile of the discrimination parameter posterior estimate}
-\item{Discrimination.75}{75th percentile of the discrimination parameter posterior estimate}
-\item{Discrimination.97.5}{97.5th percentile of the discrimination parameter posterior estimate}
+  \item{anr}{identification number of the ballot}
+  \item{Discrimination.2.5}{2.5th percentile of the discrimination parameter posterior estimate}
+  \item{Discrimination.25}{25th percentile of the discrimination parameter posterior estimate}
+  \item{Discrimination.50}{50th percentile of the discrimination parameter posterior estimate}
+  \item{Discrimination.75}{75th percentile of the discrimination parameter posterior estimate}
+  \item{Discrimination.97.5}{97.5th percentile of the discrimination parameter posterior estimate}
+}
 }
 \usage{
 data(static_estimates)
