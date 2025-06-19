@@ -1,0 +1,28 @@
+#' Posterior estimate for parties' positions of a dynamic Bayesian IRT model
+#'
+#' Data with posterior estimates of a dynamic Bayesian IRT based on
+#' the computation in Walder (2025). This data gives the dynamic party position
+#' based on party vote recommendation on direct democratic ballots (1960-2015).
+#'
+#' @docType data
+#'
+#' @usage data(party_pos_static_estimates)
+#'
+#' @format A data frame with 5 rows and 7 variables:
+#' \describe{
+#'   \item{party}{The political party for which the position is computed}
+#'   \item{legislature}{The legislature for which the position is computed}
+#'   \item{Discrimination.2.5}{2.5th percentile of the discrimination parameter posterior estimate}
+#'   \item{Discrimination.25}{25th percentile of the discrimination parameter posterior estimate}
+#'   \item{Discrimination.50}{50th percentile of the discrimination parameter posterior estimate}
+#'   \item{Discrimination.75}{75th percentile of the discrimination parameter posterior estimate}
+#'   \item{Discrimination.97.5}{97.5th percentile of the discrimination parameter posterior estimate}
+#' }
+#' @keywords datasets
+#'
+#' @references Walder (2025) Latent Ideological Positions of Swiss Parties and Subsets of the Population
+#'
+#'
+#' @examples
+#' data(party_pos_dynamic_estimates)
+"party_pos_dynamic_estimates"
