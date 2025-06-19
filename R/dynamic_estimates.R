@@ -1,12 +1,12 @@
-#' Posterior estimate for ballot proposal of a static Bayesian IRT model
+#' Posterior estimate for ballot proposal of a dynamic Bayesian IRT model
 #'
-#' Data with posterior estimates of a static Bayesian IRT based on
+#' Data with posterior estimates of a dynamic Bayesian IRT based on
 #' the computation in Walder (2025). This data enables estimating the
 #' position of cantons and municipalities on the party competition space.
 #'
 #' @docType data
 #'
-#' @usage data(static_estimates)
+#' @usage data(dynamic_estimates)
 #'
 #' @format A data frame with 453 rows and 6 variables:
 #' \describe{
@@ -23,5 +23,5 @@
 #'
 #'
 #' @examples
-#' data(static_estimates)
-"static_estimates"
+#' data(dynamic_estimates)
+"dynamic_estimates"
