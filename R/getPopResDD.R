@@ -52,6 +52,8 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
     data("Data_mun1")
     data("Data_mun2")
     data_mun <- cbind(data_mun1, data_mun2)
+    rm(list="data_mun1")
+    rm(list="data_mun2")
   }
 
   if (Download.OFS==T) {
