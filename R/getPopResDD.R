@@ -49,7 +49,7 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
   }
 
   if (Download.OFS==F) {
-    data_mun <- cbind(RSwissPos::data_mun1, RSwissPos::data_mun1)
+    data_mun <- cbind(RSwissPos::data_mun1, RSwissPos::data_mun2)
   }
 
   if (Download.OFS==T) {
