@@ -1,4 +1,4 @@
-#' Loads or downloads and formats the latest dataset on municipal results for direct democratic ballots
+#' Downloads and formats the latest dataset on municipal results for direct democratic ballots
 #'
 #' This function downloads the latest dataset for municipal results in Swiss National
 #' direct democratic ballots. These results are available for municipalities, districts,
@@ -6,7 +6,7 @@
 #' which can take a few seconds.
 #'
 #' @param PlaceType Indicates the geographical level(s) that should be extracted from the data. Default value is 'All' which returns results at the National, Cantonal, District and Municipality levels. Can take value 'Country', 'Canton', 'District', or 'Municipality', which return the result for the geographical level indicated.
-#' @param Download.OFS Indicates whether you want to download the latest version of the data from the OFS or use the data in the package directly. The downloaded data takes a minute to load and format, dpending on your connection. 
+#' @param Download.OFS Indicates whether you want to download the latest version of the data from the OFS or use the data in the package directly. The downloaded data takes a minute to load and format, dpending on your connection.
 #' @return A dataset with geographical level and ballot as the unit of analysis.
 #' @format A data.frame object with 15 variables:
 #' \describe{
@@ -49,9 +49,7 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
   }
 
   if (Download.OFS==F) {
-    data("Data_mun1")
-    data("Data_mun2")
-    data_mun <- cbind(data_mun1, data_mun2)
+    data_mun <- cbind(RSwissPos::data_mun1, RSwissPos::data_mun1)
   }
 
   if (Download.OFS==T) {
