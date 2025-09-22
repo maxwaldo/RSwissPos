@@ -68,7 +68,7 @@ CAP <- getCAP(Column.names = c("id", "majortopic"))
 
 ### Get posterior estimates value of the static and dynamic Bayesian IRT models used to measure latent position of the sub-population in Walder (2025). 
 
-The package also provides posterior estimates from the Bayesian Item-Response Theory models used to compute static and dynamic ideological position of parties and sub-national population in the paper Walder (2025) Latent ideological positions of swiss parties and subsets of the population. _Swiss Political Science Review_. These parameters can be used to replicated the measurement developped in this paper and be applied to other research. To have a full hand on approach on how to replicate the models to measure the ideological of sub-national population, see the vignette XXX.
+The package also provides posterior estimates from the Bayesian Item-Response Theory models used to compute static and dynamic ideological position of parties and sub-national population in the paper Walder (2025) Latent ideological positions of swiss parties and subsets of the population. _Swiss Political Science Review_. These parameters can be used to replicated the measurement developped in this paper and be applied to other research. To have a full hand on approach on how to replicate the models to measure the ideological of sub-national population, see the vignette at https://maxwaldo.github.io/Latent_pos_subset_pop.html.
 
 Four types of parameter are available in the package. First, estimates that indicate static and dynamic party positions are available. To get the static party position you can run: 
 
