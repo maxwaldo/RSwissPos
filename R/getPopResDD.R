@@ -10,7 +10,8 @@
 #' @return A dataset with geographical level and ballot as the unit of analysis.
 #' @format A data.frame object with 15 variables:
 #' \describe{
-#'   \item{DateName}{Date and title of the ballot.}
+#'   \item{DateNameDE}{Date and title of the ballot in German.}
+#'   \item{DateNameFR}{Date and title of the ballot in French.}
 #'   \item{Place}{Geographical unit's name.}
 #'   \item{YesPercent}{Percentage of Yes vote for the ballot in the geographical unit.}
 #'   \item{YesVote}{Number of Yes vote for the ballot in the geographical unit.}
@@ -34,7 +35,7 @@
 #'
 #' @export
 
-getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
+getPopResDD <- function(PlaceType = "All", Download.OFS = T) {
 
   if (length(PlaceType)==0) {
     stop("Error: PlaceType cannot be empty. It must indicate one of the following: 'All', 'Country', 'Catnon', 'District', 'Municipality'")
@@ -49,15 +50,36 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
   }
 
   if (Download.OFS==F) {
-    data_mun <- cbind(RSwissPos::data_mun1, RSwissPos::data_mun2)
+    data_mun <- cbind(RSwissPos::data_mun1, RSwissPos::data_mun1)
   }
 
   if (Download.OFS==T) {
-    px_data <- pxR::read.px(file = url("https://dam-api.bfs.admin.ch/hub/api/dam/assets/32426125/master"), encoding = "UTF-8")
-    data_mun <- as.data.frame(px_data)
+    get_bfs_asset_url <- function(number_bfs) {
+      paste0(
+        "https://dam-api.bfs.admin.ch/hub/api/dam/assets/orderNr:",
+        number_bfs,
+        "/master"
+      )
+    }
 
-    data_mun <- as.data.frame(list(DateName = data_mun[data_mun$Ergebnis=="Ja in %",]$Datum.und.Vorlage,
-                                   Place = data_mun[data_mun$Ergebnis=="Ja in %",]$Kanton.......Bezirk........Gemeinde.........,
+    url_mun <- get_bfs_asset_url(
+      "px-x-1703030000_101"
+    )
+
+    px_data <- pxR::read.px(
+      file = url(url_mun)
+    )
+
+    #px_data <- pxR::read.px(file = url("https://dam-api.bfs.admin.ch/hub/api/dam/assets/32426125/master"), encoding = "UTF-8")
+    data_mun <- as.data.frame(px_data)
+    data_json <- suppressWarnings(rjson::fromJSON(paste(readLines("https://www.pxweb.bfs.admin.ch/api/v1/fr/px-x-1703030000_101/px-x-1703030000_101.px"), collapse="")))
+
+    data_mun <- as.data.frame(list(DateNameDE = data_mun[data_mun$Ergebnis=="Ja in %",]$Datum.und.Vorlage,
+                                   DateNameFR = rep(data_json[["variables"]][[2]][["valueTexts"]], length(data_json[["variables"]][[1]][["values"]])),
+                                   PlaceDE = data_mun[data_mun$Ergebnis=="Ja in %",]$Kanton.......Bezirk........Gemeinde.........,
+                                   PlaceFR = rep(data_json[["variables"]][[1]][["valueTexts"]], each= length(data_json[["variables"]][[2]][["valueTexts"]])),
+                                   NumberMun = rep(data_json[["variables"]][[1]][["values"]], each= length(data_json[["variables"]][[2]][["valueTexts"]])),
+                                   anr = rep(data_json[["variables"]][[2]][["values"]], length(data_json[["variables"]][[1]][["values"]])),
                                    YesPercent = data_mun[data_mun$Ergebnis=="Ja in %",]$value,
                                    YesVote = data_mun[data_mun$Ergebnis=="Ja",]$value,
                                    NoVote = data_mun[data_mun$Ergebnis=="Nein",]$value,
@@ -67,31 +89,19 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
                                    ValidBallots = data_mun[data_mun$Ergebnis=="Gültige Stimmzettel",]$value))
 
 
-    data_json <- suppressWarnings(rjson::fromJSON(paste(readLines("https://www.pxweb.bfs.admin.ch/api/v1/fr/px-x-1703030000_101/px-x-1703030000_101.px"), collapse="")))
-    muni_id <- as.data.frame(list(NumberMun = data_json[["variables"]][[1]][["values"]],
-                                  Place = data_json[["variables"]][[1]][["valueTexts"]]))
-
-    valid_items <- which(as.Date(substr(data_json[["variables"]][[2]][["valueTexts"]], 1, 10)) %in% as.Date(substr(levels(data_mun$DateName), 1, 10)))
-    project_id <- as.data.frame(list(anr = data_json[["variables"]][[2]][["values"]][valid_items],
-                                     DateName = levels(data_mun$DateName)))
-
-
 
     data_mun$PlaceType <- NA
-    data_mun[substr(data_mun$Place, 1, 1)=="S",]$PlaceType <- "Country"
-    data_mun[substr(data_mun$Place, 1, 1)=="-",]$PlaceType <- "Canton"
-    data_mun[substr(data_mun$Place, 1, 1)==">",]$PlaceType <- "Disctrict"
-    data_mun[substr(data_mun$Place, 1, 1)==".",]$PlaceType <- "Municipality"
+    data_mun[substr(data_mun$PlaceDE, 1, 1)=="S",]$PlaceType <- "Country"
+    data_mun[substr(data_mun$PlaceDE, 1, 1)=="-",]$PlaceType <- "Canton"
+    data_mun[substr(data_mun$PlaceDE, 1, 1)==">",]$PlaceType <- "Disctrict"
+    data_mun[substr(data_mun$PlaceDE, 1, 1)==".",]$PlaceType <- "Municipality"
+    
 
-    muni_id[muni_id$Place=="Suisse",]$Place <- "Schweiz"
+    data_mun$Date <- as.Date(substr(data_mun$DateNameDE, 1, 10))
+    data_mun$Year <- as.numeric(substr(data_mun$DateNameDE, 1, 4))
 
-    data_mun <- merge(data_mun, muni_id, by = "Place")
-    data_mun <- merge(data_mun, project_id, by = "DateName")
-
-
-
-    data_mun$Date <- as.Date(substr(data_mun$DateName, 1, 10))
-    data_mun$Year <- as.numeric(substr(data_mun$DateName, 1, 4))
+    data_mun$TitleDE <- substr(data_mun$DateNameDE, 11, nchar(data_mun$DateNameDE))
+    data_mun$TitleFR <- substr(data_mun$DateNameFR, 11, nchar(data_mun$DateNameFR))
 
     data_mun[nchar(data_mun$NumberMun)>4,]$NumberMun <- substr(data_mun[nchar(data_mun$NumberMun)>4,]$NumberMun,
                                                                nchar(data_mun[nchar(data_mun$NumberMun)>4,]$NumberMun) - 3,
@@ -118,6 +128,12 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = F) {
 
   return(data_mun)
 }
+
+
+
+
+
+
 
 
 
