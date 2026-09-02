@@ -11,7 +11,7 @@ To install the package, run:
 devtools::install_github('maxwaldo/RSwissPos')
 ```
 
-The package has different functions to import data related to Swiss Direct democracy. 
+The package has different functions to import data related to Swiss Direct democracy, and administrative data. 
 
 ### Get results of direct democratic ballots for different geographical levels
 
@@ -32,6 +32,16 @@ Finally, you can precise the type of place you are interested in. The default op
 ```{r}
 data_mun <- getPopResDD(PlaceType="Country")
 ```
+
+### Get information on historic administrative boundaries
+
+The package also has a function to download historical Swiss administrative boundaries from 1850 to nowdays. The function uses ressources from the historical administrative boundaries from the Swiss Federal Statistical Office (BFS). For instance, to download this data run:
+
+```{r}
+boundaries_mun <- getSwissGeo(Year = 2025)
+```
+
+You can also precise the type of object you wish to download. This type can be set to _Municipality_, _District_, _Canton_, _Country_, or _Lake_. Furthermore, you can access K4 or G1 detailed maps. With K4 maps, you can also set the function parameter `surface="vegetation"`.
 
 ### Get information on Direct Democratic ballot from Swissvotes
 
