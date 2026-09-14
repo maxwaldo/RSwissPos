@@ -19,7 +19,7 @@ A dataset containing diverse information related to the .
 This function downloads the latest version of the Comparative Agenda's project coding of Swiss direct democratic ballots.
 The data collects information at the ballot level since the first national ballot in 1848.
 The codebook for the Comparative Agenda's project data set can be found here: https://minio.la.utexas.edu/compagendas/codebookfiles/switzerland_direct_democracy_codebook.pdf
-To cite, please use the following footnote: "The data used here were originally collected by Roy Gava, Pascal Sciarini, Anke Tresch and Frédéric Varone, with the support of the Swiss National Science Foundation (grant number 105511-119245/1 and project ‘The Mediatization of Political Decision Making’ sponsored as part of the National Center of Competence in Research ‘Challenges to Democracy in the 21st Century’). Neither SNSF nor the original collectors of the data bear any responsibility for the analysis reported here."
+To cite, please use the following footnote: "The data used here were originally collected by Roy Gava, Pascal Sciarini, Anke Tresch and Fr\u00e9d\u00e9ric Varone, with the support of the Swiss National Science Foundation (grant number 105511-119245/1 and project "The Mediatization of Political Decision Making" sponsored as part of the National Center of Competence in Research "Challenges to Democracy in the 21st Century"). Neither SNSF nor the original collectors of the data bear any responsibility for the analysis reported here."
 For more information see: https://www.comparativeagendas.net
 }
 \examples{
