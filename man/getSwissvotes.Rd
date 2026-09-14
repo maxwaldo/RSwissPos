@@ -19,7 +19,7 @@ A dataset containing diverse information at the ballot level.
 This function downloads the latest version of the Swissvotes dataset.
 The data collects information at the ballot level since the first national ballot in 1848.
 The codebook for the Swissvotes data set can be found here: https://swissvotes.ch/storage/84d5514faa708639fc5586ab54b0c7aae6c56ae6b9485e653988dbf72bbb8784
-To cite, please use: Swissvotes (Year). Swissvotes – die Datenbank der eidgenössischen Volksabstimmungen.
+To cite, please use: Swissvotes (Year). Swissvotes, die Datenbank der eidgen\u00f6ssischen Volksabstimmungen.
 For more information see: https://www.swissvotes.ch
 }
 \examples{
