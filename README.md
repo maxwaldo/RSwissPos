@@ -8,7 +8,7 @@ If you use this measurement please cite: Walder, M.(2025) Latent ideological pos
 To install the package, run: 
 
 ```{r}
-devtools::install_github('maxwaldo/RSwissPos')
+remotes::install_github('maxwaldo/RSwissPos')
 ```
 
 The package has different functions to import data related to Swiss Direct democracy, and administrative data. 
