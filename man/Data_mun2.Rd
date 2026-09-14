@@ -3,12 +3,18 @@
 \docType{data}
 \name{data_mun2}
 \alias{data_mun2}
-\title{First part of municipal data to upload}
-\usage{
-data(Data_mun2)
+\title{Municipal direct-democracy results — part 2}
+\format{
+A data frame.
 }
-
-\examples{
-data(Data_mun2)
+\source{
+Swiss Federal Statistical Office
+}
+\usage{
+data_mun2
+}
+\description{
+Second part of the municipal direct-democracy dataset included
+with RSwissPos.
 }
 \keyword{datasets}
