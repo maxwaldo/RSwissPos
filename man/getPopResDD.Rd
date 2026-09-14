@@ -6,28 +6,41 @@
 \format{
 A data.frame object with 15 variables:
 \describe{
-  \item{DateName}{Date and title of the ballot.}
-  \item{Place}{Geographical unit's name.}
-  \item{YesPercent}{Percentage of Yes vote for the ballot in the geographical unit.}
-  \item{YesVote}{Number of Yes vote for the ballot in the geographical unit.}
-  \item{NoVote}{Number of No vote for the ballot and the geographical unit.}
-  \item{Voters}{Number of registered voters in the geographical unit at the time of the ballot}
-  \item{ReceivedBallots}{Number of ballot received for the ballot in the geographical unit}
-  \item{Participation}{Participation in percent for the ballot in the geographical unit}
-  \item{ValidBallotsh}{Number of Valid ballots for the ballot in the geographical unit}
-  \item{PlaceType}{Geographical level of the geographical unit. Take values "Country", "Canton", "District", or "Municipality"}
-  \item{NumberMun}{Geographical unit's unique identifier.}
-  \item{anr}{Ballot's unique identifier.}
-  \item{Date}{Date of the Ballot.}
-  \item{Year}{Year of the Ballot.}
-  \item{anr.Swissvotes}{Ballot's unique identifier for the Swissvotes dataset.}
+\item{DateNameDE}{Date and title of the ballot in German.}
+\item{DateNameFR}{Date and title of the ballot in French.}
+\item{Place}{Geographical unit's name.}
+\item{YesPercent}{Percentage of Yes vote for the ballot in the geographical unit.}
+\item{YesVote}{Number of Yes vote for the ballot in the geographical unit.}
+\item{NoVote}{Number of No vote for the ballot and the geographical unit.}
+\item{Voters}{Number of registered voters in the geographical unit at the time of the ballot}
+\item{ReceivedBallots}{Number of ballot received for the ballot in the geographical unit}
+\item{Participation}{Participation in percent for the ballot in the geographical unit}
+\item{ValidBallotsh}{Number of Valid ballots for the ballot in the geographical unit}
+\item{PlaceType}{Geographical level of the geographical unit. Take values "Country", "Canton", "District", or "Municipality"}
+\item{NumberMun}{Geographical unit's unique identifier.}
+\item{anr}{Ballot's unique identifier.}
+\item{Date}{Date of the Ballot.}
+\item{Year}{Year of the Ballot.}
+\item{anr.Swissvotes}{Ballot's unique identifier for the Swissvotes dataset.}
 }
+
+data_country <- getPopResDD(
+PlaceType = "Country",
+Download.OFS = FALSE
+)
+
+data_mun <- getPopResDD(
+PlaceType = "Municipality",
+Download.OFS = FALSE
+)
 }
 \usage{
-getPopResDD(PlaceType = "All")
+getPopResDD(PlaceType = "All", Download.OFS = T)
 }
 \arguments{
 \item{PlaceType}{Indicates the geographical level(s) that should be extracted from the data. Default value is 'All' which returns results at the National, Cantonal, District and Municipality levels. Can take value 'Country', 'Canton', 'District', or 'Municipality', which return the result for the geographical level indicated.}
+
+\item{Download.OFS}{Indicates whether you want to download the latest version of the data from the OFS or use the data in the package directly. The downloaded data takes a minute to load and format, dpending on your connection.}
 }
 \value{
 A dataset with geographical level and ballot as the unit of analysis.
@@ -37,10 +50,4 @@ This function downloads the latest dataset for municipal results in Swiss Nation
 direct democratic ballots. These results are available for municipalities, districts,
 cantons, and the country since 1960. The function downloads, formats and merges and merges different files
 which can take a few seconds.
-}
-\examples{
-data_country <- getPopResDD(PlaceType = "Country") ### Gets national support for direct democratic ballots
-
-data_mun <- getPopResDD(PlaceType = "Municipality") ### Gets municipal support for direct democratic ballots
-
 }
