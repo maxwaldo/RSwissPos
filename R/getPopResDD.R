@@ -28,10 +28,15 @@
 #'   \item{anr.Swissvotes}{Ballot's unique identifier for the Swissvotes dataset.}
 #' }
 #'
-#' @examples
-#' data_country <- getPopResDD(PlaceType = "Country") ### Gets national support for direct democratic ballots
+#' data_country <- getPopResDD(
+#'   PlaceType = "Country",
+#'   Download.OFS = FALSE
+#' )
 #'
-#' data_mun <- getPopResDD(PlaceType = "Municipality") ### Gets municipal support for direct democratic ballots
+#' data_mun <- getPopResDD(
+#'   PlaceType = "Municipality",
+#'   Download.OFS = FALSE
+#' )
 #'
 #' @export
 
@@ -50,7 +55,7 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = T) {
   }
 
   if (Download.OFS==F) {
-    data_mun <- cbind(RSwissPos::data_mun1, RSwissPos::data_mun1)
+    data_mun <- rbind(data_mun1, data_mun2)
   }
 
   if (Download.OFS==T) {
@@ -74,26 +79,51 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = T) {
     data_mun <- as.data.frame(px_data)
     data_json <- suppressWarnings(rjson::fromJSON(paste(readLines("https://www.pxweb.bfs.admin.ch/api/v1/fr/px-x-1703030000_101/px-x-1703030000_101.px"), collapse="")))
 
-    data_mun <- as.data.frame(list(DateNameDE = data_mun[data_mun$Ergebnis=="Ja in %",]$Datum.und.Vorlage,
-                                   DateNameFR = rep(data_json[["variables"]][[2]][["valueTexts"]], length(data_json[["variables"]][[1]][["values"]])),
-                                   PlaceDE = data_mun[data_mun$Ergebnis=="Ja in %",]$Kanton.......Bezirk........Gemeinde.........,
-                                   PlaceFR = rep(data_json[["variables"]][[1]][["valueTexts"]], each= length(data_json[["variables"]][[2]][["valueTexts"]])),
-                                   NumberMun = rep(data_json[["variables"]][[1]][["values"]], each= length(data_json[["variables"]][[2]][["valueTexts"]])),
-                                   anr = rep(data_json[["variables"]][[2]][["values"]], length(data_json[["variables"]][[1]][["values"]])),
-                                   YesPercent = data_mun[data_mun$Ergebnis=="Ja in %",]$value,
-                                   YesVote = data_mun[data_mun$Ergebnis=="Ja",]$value,
-                                   NoVote = data_mun[data_mun$Ergebnis=="Nein",]$value,
-                                   Voters = data_mun[data_mun$Ergebnis=="Stimmberechtigte",]$value,
-                                   ReceivedBallots = data_mun[data_mun$Ergebnis=="Abgegebene Stimmen",]$value,
-                                   Participation = data_mun[data_mun$Ergebnis=="Beteiligung in %",]$value,
-                                   ValidBallots = data_mun[data_mun$Ergebnis=="Gültige Stimmzettel",]$value))
-
+    data_mun <- as.data.frame(
+      list(
+        DateNameDE = data_mun[data_mun$Ergebnis == "Ja in %", ]$Datum.und.Vorlage,
+        DateNameFR = rep(
+          data_json[["variables"]][[2]][["valueTexts"]],
+          length(data_json[["variables"]][[1]][["values"]])
+        ),
+        PlaceDE = data_mun[data_mun$Ergebnis == "Ja in %", ]$Kanton.......Bezirk........Gemeinde.........,
+        PlaceFR = rep(
+          data_json[["variables"]][[1]][["valueTexts"]],
+          each = length(data_json[["variables"]][[2]][["valueTexts"]])
+        ),
+        NumberMun = rep(
+          data_json[["variables"]][[1]][["values"]],
+          each = length(data_json[["variables"]][[2]][["valueTexts"]])
+        ),
+        anr = rep(
+          data_json[["variables"]][[2]][["values"]],
+          length(data_json[["variables"]][[1]][["values"]])
+        ),
+        YesPercent = data_mun[data_mun$Ergebnis == "Ja in %", ]$value,
+        YesVote = data_mun[data_mun$Ergebnis == "Ja", ]$value,
+        NoVote = data_mun[data_mun$Ergebnis == "Nein", ]$value,
+        Voters = data_mun[data_mun$Ergebnis == "Stimmberechtigte", ]$value,
+        ReceivedBallots = data_mun[data_mun$Ergebnis == "Abgegebene Stimmen", ]$value,
+        Participation = data_mun[data_mun$Ergebnis == "Beteiligung in %", ]$value,
+        ValidBallots = data_mun[
+          data_mun$Ergebnis == "G\u00fcltige Stimmzettel",
+        ]$value
+      )
+    )
+    
+    # Ensure text fields are actually character vectors
+    data_mun$DateNameDE <- as.character(data_mun$DateNameDE)
+    data_mun$DateNameFR <- as.character(data_mun$DateNameFR)
+    data_mun$PlaceDE <- as.character(data_mun$PlaceDE)
+    data_mun$PlaceFR <- as.character(data_mun$PlaceFR)
+    data_mun$NumberMun <- as.character(data_mun$NumberMun)
+    data_mun$anr <- as.character(data_mun$anr)
 
 
     data_mun$PlaceType <- NA
     data_mun[substr(data_mun$PlaceDE, 1, 1)=="S",]$PlaceType <- "Country"
     data_mun[substr(data_mun$PlaceDE, 1, 1)=="-",]$PlaceType <- "Canton"
-    data_mun[substr(data_mun$PlaceDE, 1, 1)==">",]$PlaceType <- "Disctrict"
+    data_mun[substr(data_mun$PlaceDE, 1, 1)==">",]$PlaceType <- "District"
     data_mun[substr(data_mun$PlaceDE, 1, 1)==".",]$PlaceType <- "Municipality"
     
 
@@ -118,7 +148,7 @@ getPopResDD <- function(PlaceType = "All", Download.OFS = T) {
     data_mun <- data_mun[data_mun$PlaceType=="Canton",]
   }
   if (PlaceType=="District") {
-    data_mun <- data_mun[data_mun$PlaceType=="Disctrict",]
+    data_mun <- data_mun[data_mun$PlaceType=="District",]
   }
   if (PlaceType=="Municipality") {
     data_mun <- data_mun[data_mun$PlaceType=="Municipality",]
