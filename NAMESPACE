@@ -2,5 +2,5 @@
 
 export(getCAP)
 export(getPopResDD)
-export(getSwissvotes)
 export(getSwissGeo)
+export(getSwissvotes)
