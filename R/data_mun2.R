@@ -1,4 +1,9 @@
-#' First part of municipal data to upload
-#' @examples
-#' data(Data_mun2)
-"Data_mun2"
+#' Municipal direct-democracy results — part 2
+#'
+#' Second part of the municipal direct-democracy dataset included
+#' with RSwissPos.
+#'
+#' @format A data frame.
+#'
+#' @source Swiss Federal Statistical Office
+"data_mun2"
