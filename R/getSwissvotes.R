@@ -3,7 +3,7 @@
 #' This function downloads the latest version of the Swissvotes dataset.
 #' The data collects information at the ballot level since the first national ballot in 1848.
 #' The codebook for the Swissvotes data set can be found here: https://swissvotes.ch/storage/84d5514faa708639fc5586ab54b0c7aae6c56ae6b9485e653988dbf72bbb8784
-#' To cite, please use: Swissvotes (Year). Swissvotes – die Datenbank der eidgenössischen Volksabstimmungen.
+#' To cite, please use: Swissvotes (Year). Swissvotes, die Datenbank der eidgen\u00f6ssischen Volksabstimmungen.
 #' For more information see: https://www.swissvotes.ch
 #'
 #' @param Column.names Indicates the Column name of interest that should be extracted from the data. Default value is 'All' which returns all the variables. It can take any number of existing column names from the swissvotes dataset.
@@ -25,7 +25,7 @@ getSwissvotes <- function(Column.names = "All") {
   }
 
 
-  swissvotes <- read.csv(url("https://swissvotes.ch/page/dataset/swissvotes_dataset.csv"), sep = ";")
+  swissvotes <- utils::read.csv(url("https://swissvotes.ch/page/dataset/swissvotes_dataset.csv"), sep = ";")
 
   if (any(Column.names %in% c("All", colnames(swissvotes)))==F) {
     stop("Error: Column.names must indicate 'All' a vector of names with one or more of the variables in the dataset. The codebook for the Swissvotes data can be found there: https://swissvotes.ch/storage/84d5514faa708639fc5586ab54b0c7aae6c56ae6b9485e653988dbf72bbb8784")
@@ -35,7 +35,7 @@ getSwissvotes <- function(Column.names = "All") {
     stop("Error: 'All' is not one of the variable name. Either precise 'All' and get all the variables, or chose one of more of the variable name in the dataset. The codebook for the Swissvotes data can be found there: https://swissvotes.ch/storage/84d5514faa708639fc5586ab54b0c7aae6c56ae6b9485e653988dbf72bbb8784")
   }
 
-  message("Please cite: Swissvotes (Year). Swissvotes – die Datenbank der eidgenössischen Volksabstimmungen. ")
+  message("Please cite: Swissvotes (Year). Swissvotes, die Datenbank der eidgen\u00f6ssischen Volksabstimmungen. ")
 
   if (length(Column.names)>1) {
     return(swissvotes[,which(colnames(swissvotes) %in% Column.names)])
